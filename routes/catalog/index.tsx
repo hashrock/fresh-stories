@@ -1,6 +1,7 @@
 // Document https://fresh.deno.dev/docs/getting-started/create-a-route
 
 import { defineRoute } from "$fresh/server.ts";
+import StoryFrame from "../../islands/StoryFrame.tsx";
 // import { expandGlob } from "https://deno.land/std@0.208.0/fs/expand_glob.ts";
 
 // function toRelativePath(path: string) {
@@ -28,7 +29,9 @@ export default defineRoute(async (req, ctx) => {
           </ul>
         </div>
         <div class="flex-1 p-4">
-          <iframe class="border p-4" src={`./${path}`} />
+          <StoryFrame>
+            <iframe class="border p-4 w-full" src={`./${path}`} />
+          </StoryFrame>
         </div>
       </div>
     </main>
