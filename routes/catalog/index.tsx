@@ -8,11 +8,10 @@ function toRelativePath(path: string) {
 }
 
 export default defineRoute(async (req, ctx) => {
-  const stories = [];
-  for await (const entry of expandGlob("./**/*.stories.tsx")) {
-    stories.push(toRelativePath(entry.path));
+  const stories = [
+    "Button.stories",
+  ];
 
-  }
   return (
     <main>
       <h1>Index</h1>
