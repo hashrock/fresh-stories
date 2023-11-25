@@ -23,6 +23,11 @@ export default defineRoute(async (_req, ctx) => {
   }
 
   if (single !== null) {
+    // secure the path
+    if (stories.find((story) => story.path === path) === undefined) {
+      return new Response("Not allowed", { status: 403 });
+    }
+
     const story = await import(
       `../${path}`
     );
