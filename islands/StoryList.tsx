@@ -37,7 +37,7 @@ export default function Stories({ stories, path }: StoriesProps) {
           return (
             <li
               class={cx(
-                "py-2 border-l pl-4 text-sm",
+                "py-2 border-l pl-4 text-sm hover:border-purple-500",
                 active && "border-purple-400",
               )}
             >
