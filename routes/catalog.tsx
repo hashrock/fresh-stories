@@ -28,10 +28,11 @@ export default defineRoute(async (_req, ctx) => {
     const story = await import(
       `../${path}`
     );
+    const { default: Story } = story;
 
     return (
       <div class="page">
-        <story.default />
+        <Story />
       </div>
     );
   }
