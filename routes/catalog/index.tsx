@@ -11,8 +11,10 @@ interface Story {
   name: string;
 }
 
-export default defineRoute(async (req, ctx) => {
+export default defineRoute(async (_req, ctx) => {
   const path = ctx.url.searchParams.get("path");
+  const single = ctx.url.searchParams.get("single");
+
   const storiesIter = await expandGlob("islands/stories/**/*.stories.tsx");
   const stories: Story[] = [];
   for await (const story of storiesIter) {
@@ -22,7 +24,7 @@ export default defineRoute(async (req, ctx) => {
     });
   }
 
-  if (path) {
+  if (single !== null) {
     const story = await import(
       `../../${path}`
     );
@@ -49,11 +51,13 @@ export default defineRoute(async (req, ctx) => {
             ))}
           </ul>
         </div>
-        <div class="flex-1 p-4">
-          <StoryFrame>
-            <iframe class="border p-4 w-full" src={`./${path}`} />
-          </StoryFrame>
-        </div>
+        {path && (
+          <div class="flex-1 p-4">
+            <StoryFrame>
+              <iframe class="border p-4 w-full" src={`?single&path=${path}`} />
+            </StoryFrame>
+          </div>
+        )}
       </div>
     </main>
   );
