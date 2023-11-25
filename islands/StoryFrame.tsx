@@ -30,15 +30,17 @@ export default function StoryFrame(props: StoryFrameProps) {
 
   return (
     <div class="flex">
-      <div class="border" style={{ width: `${width}px` }}>
+      <div class="border rounded-lg" style={{ width: `${width}px` }}>
         {props.children}
       </div>
       <div
-        class="bg-gray-200 w-4 cursor-ew-resize hover:bg-gray-300 transition-colors"
+        class="w-4 cursor-ew-resize group flex justify-center items-center"
         onPointerDown={onPointerDown}
         onPointerUp={onPointerUp}
         onPointerMove={onPointerMove}
       >
+        <div class="bg-gray-300 transition-colors group-hover:bg-gray-500 h-12 w-2 rounded">
+        </div>
       </div>
     </div>
   );

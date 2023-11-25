@@ -34,7 +34,7 @@ export default defineRoute(async (_req, ctx) => {
     const { default: Story } = story;
 
     return (
-      <div class="page">
+      <div class="p-8 flex justify-center items-center">
         <Story />
       </div>
     );
@@ -54,7 +54,7 @@ export default defineRoute(async (_req, ctx) => {
             </a>
           </div>
 
-          <h1 class="flex gap-2 items-center mt-4 uppercase text-sm font-bold text-gray-600">
+          <h1 class="flex gap-2 items-center mt-6 uppercase text-sm font-bold text-gray-600">
             <IconComponents class="w-5 h-5" />
             Stories
           </h1>
@@ -85,9 +85,12 @@ export default defineRoute(async (_req, ctx) => {
           </ul>
         </div>
         {path && (
-          <div class="flex-1 p-4">
+          <div class="flex-1 p-8">
             <StoryFrame>
-              <iframe class="border p-4 w-full" src={`?single&path=${path}`} />
+              <iframe
+                class="p-4 w-full"
+                src={`?single&path=${path}`}
+              />
             </StoryFrame>
           </div>
         )}
