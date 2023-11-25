@@ -53,7 +53,7 @@ export default function StoryFrame(props: StoryFrameProps) {
           ref={iframeRef}
           class="w-full"
           src={props.path}
-          style={{ height: `${height}px` }}
+          style={{ height: `${Math.max(height, 150)}px` }}
         />
       </div>
       <div
