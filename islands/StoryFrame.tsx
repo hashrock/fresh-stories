@@ -1,8 +1,4 @@
-// Document https://fresh.deno.dev/docs/concepts/islands
-
-import type { Signal } from "@preact/signals";
 import { useEffect, useRef, useState } from "preact/hooks";
-import { ComponentChild, JSX } from "preact";
 import { cx } from "twind/core";
 
 interface StoryFrameProps {
@@ -10,7 +6,7 @@ interface StoryFrameProps {
 }
 
 export default function StoryFrame(props: StoryFrameProps) {
-  const [width, setWidth] = useState(600);
+  const [width, setWidth] = useState(960);
   const [height, setHeight] = useState(0);
   const [ready, setReady] = useState(false);
   const iframeRef = useRef<HTMLIFrameElement>(null);
@@ -50,7 +46,7 @@ export default function StoryFrame(props: StoryFrameProps) {
   return (
     <div class={cx("flex transition-all", ready ? "opacity-100" : "opacity-0")}>
       <div
-        class={cx("border rounded-lg")}
+        class="border rounded-lg"
         style={{ width: `${width}px` }}
       >
         <iframe

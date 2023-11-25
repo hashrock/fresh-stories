@@ -8,12 +8,15 @@ import * as $2 from "./routes/api/joke.ts";
 import * as $3 from "./routes/catalog.tsx";
 import * as $4 from "./routes/greet/[name].tsx";
 import * as $5 from "./routes/index.tsx";
-import * as $$0 from "./islands/Counter.tsx";
-import * as $$1 from "./islands/StoryFrame.tsx";
-import * as $$2 from "./islands/StoryList.tsx";
-import * as $$3 from "./islands/stories/Button.tsx";
-import * as $$4 from "./islands/stories/Counter.tsx";
-import * as $$5 from "./islands/stories/Footer.tsx";
+import * as $$0 from "./islands/ColoredButton.tsx";
+import * as $$1 from "./islands/Counter.tsx";
+import * as $$2 from "./islands/StoryFrame.tsx";
+import * as $$3 from "./islands/StoryList.tsx";
+import * as $$4 from "./islands/stories/Button.tsx";
+import * as $$5 from "./islands/stories/Counter.tsx";
+import * as $$6 from "./islands/stories/Footer.tsx";
+import * as $$7 from "./islands/stories/Header.tsx";
+import * as $$8 from "./islands/stories/Hero.tsx";
 
 const manifest = {
   routes: {
@@ -25,12 +28,15 @@ const manifest = {
     "./routes/index.tsx": $5,
   },
   islands: {
-    "./islands/Counter.tsx": $$0,
-    "./islands/StoryFrame.tsx": $$1,
-    "./islands/StoryList.tsx": $$2,
-    "./islands/stories/Button.tsx": $$3,
-    "./islands/stories/Counter.tsx": $$4,
-    "./islands/stories/Footer.tsx": $$5,
+    "./islands/ColoredButton.tsx": $$0,
+    "./islands/Counter.tsx": $$1,
+    "./islands/StoryFrame.tsx": $$2,
+    "./islands/StoryList.tsx": $$3,
+    "./islands/stories/Button.tsx": $$4,
+    "./islands/stories/Counter.tsx": $$5,
+    "./islands/stories/Footer.tsx": $$6,
+    "./islands/stories/Header.tsx": $$7,
+    "./islands/stories/Hero.tsx": $$8,
   },
   baseUrl: import.meta.url,
 };
