@@ -3,15 +3,10 @@ import StoryFrame from "../islands/StoryFrame.tsx";
 import { expandGlob } from "https://deno.land/std@0.208.0/fs/expand_glob.ts";
 import IconComponents from "https://deno.land/x/tabler_icons_tsx@0.0.5/tsx/components.tsx";
 import IconChevronLeft from "https://deno.land/x/tabler_icons_tsx@0.0.5/tsx/chevron-left.tsx";
-import { cx } from "twind/core";
+import StoryList, { Story } from "../islands/StoryList.tsx";
 
 function toRelativePath(path: string) {
   return path.replace(Deno.cwd(), "").replace(/^\//, "");
-}
-
-interface Story {
-  path: string;
-  name: string;
 }
 
 export default defineRoute(async (_req, ctx) => {
@@ -43,7 +38,7 @@ export default defineRoute(async (_req, ctx) => {
   return (
     <main>
       <div class="flex">
-        <div class="w-[20rem] py-4 pl-8 bg-gray-50 h-screen">
+        <div class="w-[20rem] py-4 px-8 bg-gray-50 h-screen">
           <div>
             <a
               href="/"
@@ -54,35 +49,12 @@ export default defineRoute(async (_req, ctx) => {
             </a>
           </div>
 
-          <h1 class="flex gap-2 items-center mt-6 uppercase text-sm font-bold text-gray-600">
+          <h1 class="flex gap-2 items-center mt-6 uppercase text-sm font-bold text-gray-600 text-center">
             <IconComponents class="w-5 h-5" />
             Stories
           </h1>
-          <ul class="mt-4">
-            {stories.map((story) => {
-              const active = story.path === path;
-              return (
-                <li
-                  class={cx(
-                    "py-2 border-l pl-4 text-sm",
-                    active && "border-purple-400",
-                  )}
-                >
-                  <a
-                    class={cx(
-                      "block",
-                      active
-                        ? "text-purple-500 font-semibold"
-                        : "text-gray-500",
-                    )}
-                    href={`?path=${story.path}`}
-                  >
-                    {story.name}
-                  </a>
-                </li>
-              );
-            })}
-          </ul>
+
+          <StoryList stories={stories} path={path} />
         </div>
         {path && (
           <div class="flex-1 p-8">
