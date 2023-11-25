@@ -86,12 +86,7 @@ export default defineRoute(async (_req, ctx) => {
         </div>
         {path && (
           <div class="flex-1 p-8">
-            <StoryFrame>
-              <iframe
-                class="p-4 w-full"
-                src={`?single&path=${path}`}
-              />
-            </StoryFrame>
+            <StoryFrame path={`?single&path=${path}`} />
           </div>
         )}
       </div>
