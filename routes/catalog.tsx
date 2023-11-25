@@ -1,5 +1,5 @@
 import { defineRoute } from "$fresh/server.ts";
-import StoryFrame from "../../islands/StoryFrame.tsx";
+import StoryFrame from "../islands/StoryFrame.tsx";
 import { expandGlob } from "https://deno.land/std@0.208.0/fs/expand_glob.ts";
 
 function toRelativePath(path: string) {
@@ -26,7 +26,7 @@ export default defineRoute(async (_req, ctx) => {
 
   if (single !== null) {
     const story = await import(
-      `../../${path}`
+      `../${path}`
     );
 
     return (
