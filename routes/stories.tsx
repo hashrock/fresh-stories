@@ -37,14 +37,16 @@ export default defineRoute(async (_req, ctx) => {
     const isDark = dark !== null;
 
     return (
-      <div
-        class={cx(
-          "p-8 flex justify-center items-center",
-          isDark ? "bg-gray-900 text-gray-100" : "bg-gray-50 text-gray-900",
-          isDark && "dark",
-        )}
-      >
-        <Story />
+      <div class={cx(isDark && "dark")}>
+        <div
+          class={cx(
+            "p-8 flex justify-center items-center",
+            "dark:(bg-gray-900 text-gray-100)",
+            "bg-gray-50 text-gray-900",
+          )}
+        >
+          <Story />
+        </div>
       </div>
     );
   }
