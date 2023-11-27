@@ -11,6 +11,7 @@ export default function StoryFrame(props: StoryFrameProps) {
   const [ready, setReady] = useState(false);
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const [offsetX, setOffsetX] = useState<number | null>(null);
+  const [darkMode, setDarkMode] = useState(false);
 
   useEffect(() => {
     const iframe = iframeRef.current;
@@ -44,25 +45,41 @@ export default function StoryFrame(props: StoryFrameProps) {
   };
 
   return (
-    <div class={cx("flex transition-all", ready ? "opacity-100" : "opacity-0")}>
-      <div
-        class="border rounded-lg"
-        style={{ width: `${width}px` }}
-      >
-        <iframe
-          ref={iframeRef}
-          class="w-full"
-          src={props.path}
-          style={{ height: `${Math.max(height, 150)}px` }}
-        />
+    <div>
+      <div>
+        <label class="text-sm flex items-center">
+          <input
+            type="checkbox"
+            checked={darkMode}
+            onChange={(e) => {
+              setDarkMode(e.currentTarget.checked);
+            }}
+          />
+          <span class="ml-1 text-sm">Dark</span>
+        </label>
       </div>
       <div
-        class="w-4 cursor-ew-resize group flex justify-center items-center"
-        onPointerDown={onPointerDown}
-        onPointerUp={onPointerUp}
-        onPointerMove={onPointerMove}
+        class={cx("flex transition-all", ready ? "opacity-100" : "opacity-0")}
       >
-        <div class="bg-gray-300 transition-colors group-hover:bg-gray-500 h-12 w-2 rounded">
+        <div
+          class="border rounded-lg"
+          style={{ width: `${width}px` }}
+        >
+          <iframe
+            ref={iframeRef}
+            class="w-full"
+            src={`${props.path}${darkMode ? "&dark" : ""}`}
+            style={{ height: `${Math.max(height, 150)}px` }}
+          />
+        </div>
+        <div
+          class="w-4 cursor-ew-resize group flex justify-center items-center"
+          onPointerDown={onPointerDown}
+          onPointerUp={onPointerUp}
+          onPointerMove={onPointerMove}
+        >
+          <div class="bg-gray-300 transition-colors group-hover:bg-gray-500 h-12 w-2 rounded">
+          </div>
         </div>
       </div>
     </div>

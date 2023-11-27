@@ -4,6 +4,7 @@ import { expandGlob } from "https://deno.land/std@0.208.0/fs/expand_glob.ts";
 import IconComponents from "https://deno.land/x/tabler_icons_tsx@0.0.5/tsx/components.tsx";
 import IconChevronLeft from "https://deno.land/x/tabler_icons_tsx@0.0.5/tsx/chevron-left.tsx";
 import StoryList, { Story } from "../islands/StoryList.tsx";
+import { cx } from "twind/core";
 
 function toRelativePath(path: string) {
   return path.replace(Deno.cwd(), "").replace(/^\//, "");
@@ -12,6 +13,7 @@ function toRelativePath(path: string) {
 export default defineRoute(async (_req, ctx) => {
   const path = ctx.url.searchParams.get("path");
   const single = ctx.url.searchParams.get("single");
+  const dark = ctx.url.searchParams.get("dark");
 
   const storiesIter = await expandGlob("islands/stories/**/*.tsx");
   const stories: Story[] = [];
@@ -32,9 +34,16 @@ export default defineRoute(async (_req, ctx) => {
       `../${path}`
     );
     const { default: Story } = story;
+    const isDark = dark !== null;
 
     return (
-      <div class="p-8 flex justify-center items-center">
+      <div
+        class={cx(
+          "p-8 flex justify-center items-center",
+          isDark ? "bg-gray-900 text-gray-100" : "bg-gray-50 text-gray-900",
+          isDark && "dark",
+        )}
+      >
         <Story />
       </div>
     );
