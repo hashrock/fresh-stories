@@ -1,9 +1,7 @@
-import { JSX } from "preact";
-import { IS_BROWSER } from "$fresh/runtime.ts";
 import { Button } from "../../components/Button.tsx";
 import ColoredButton from "../ColoredButton.tsx";
 
-export default function Stories(props: JSX.HTMLAttributes<HTMLButtonElement>) {
+export default function Stories() {
   return (
     <>
       <div class="space-y-4">
@@ -22,3 +20,15 @@ export default function Stories(props: JSX.HTMLAttributes<HTMLButtonElement>) {
     </>
   );
 }
+
+export const description = `
+# You can use markdown here
+
+\`\`\`tsx
+<ColoredButton>
+  Usage
+</ColoredButton>
+\`\`\`
+
+
+`;
