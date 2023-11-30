@@ -50,6 +50,13 @@ export default defineRoute(async (_req, ctx) => {
     }
   }
 
+  if (path === null && stories.length > 0) {
+    return new Response(`Redirecting to ${path}`, {
+      headers: { "Location": "?path=" + stories[0].path },
+      status: 307,
+    });
+  }
+
   return (
     <main>
       <div class="flex">
