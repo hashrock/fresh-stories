@@ -1,6 +1,10 @@
 import { JSX } from "preact";
-import Hero from "../components/Hero.tsx";
+import Footer from "../../components/Footer.tsx";
 
 export default function Stories(props: JSX.HTMLAttributes<HTMLButtonElement>) {
-  return <Hero />;
+  return (
+    <Footer>
+      <>test</>
+    </Footer>
+  );
 }

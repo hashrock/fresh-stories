@@ -1,7 +1,7 @@
 import { JSX } from "preact";
 import { IS_BROWSER } from "$fresh/runtime.ts";
-import { Button } from "../components/Button.tsx";
-import ColoredButton from "./ColoredButton.tsx";
+import { Button } from "../../components/Button.tsx";
+import ColoredButton from "../ColoredButton.tsx";
 
 export default function Stories(props: JSX.HTMLAttributes<HTMLButtonElement>) {
   return (

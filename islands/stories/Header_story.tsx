@@ -1,10 +1,6 @@
 import { JSX } from "preact";
-import Footer from "../components/Footer.tsx";
+import Header from "../../components/Header.tsx";
 
 export default function Stories(props: JSX.HTMLAttributes<HTMLButtonElement>) {
-  return (
-    <Footer>
-      <>test</>
-    </Footer>
-  );
+  return <Header active="/" />;
 }

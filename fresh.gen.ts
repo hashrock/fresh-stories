@@ -6,15 +6,15 @@ import * as $_404 from "./routes/_404.tsx";
 import * as $_app from "./routes/_app.tsx";
 import * as $index from "./routes/index.tsx";
 import * as $stories from "./routes/stories.tsx";
-import * as $Button_story from "./islands/Button_story.tsx";
 import * as $ColoredButton from "./islands/ColoredButton.tsx";
 import * as $Counter from "./islands/Counter.tsx";
-import * as $Counter_story from "./islands/Counter_story.tsx";
-import * as $Footer_story from "./islands/Footer_story.tsx";
-import * as $Header_story from "./islands/Header_story.tsx";
-import * as $Hero_story from "./islands/Hero_story.tsx";
 import * as $StoryFrame from "./islands/StoryFrame.tsx";
 import * as $StoryList from "./islands/StoryList.tsx";
+import * as $stories_Button_story from "./islands/stories/Button_story.tsx";
+import * as $stories_Counter_story from "./islands/stories/Counter_story.tsx";
+import * as $stories_Footer_story from "./islands/stories/Footer_story.tsx";
+import * as $stories_Header_story from "./islands/stories/Header_story.tsx";
+import * as $stories_Hero_story from "./islands/stories/Hero_story.tsx";
 import { type Manifest } from "$fresh/server.ts";
 
 const manifest = {
@@ -25,15 +25,15 @@ const manifest = {
     "./routes/stories.tsx": $stories,
   },
   islands: {
-    "./islands/Button_story.tsx": $Button_story,
     "./islands/ColoredButton.tsx": $ColoredButton,
     "./islands/Counter.tsx": $Counter,
-    "./islands/Counter_story.tsx": $Counter_story,
-    "./islands/Footer_story.tsx": $Footer_story,
-    "./islands/Header_story.tsx": $Header_story,
-    "./islands/Hero_story.tsx": $Hero_story,
     "./islands/StoryFrame.tsx": $StoryFrame,
     "./islands/StoryList.tsx": $StoryList,
+    "./islands/stories/Button_story.tsx": $stories_Button_story,
+    "./islands/stories/Counter_story.tsx": $stories_Counter_story,
+    "./islands/stories/Footer_story.tsx": $stories_Footer_story,
+    "./islands/stories/Header_story.tsx": $stories_Header_story,
+    "./islands/stories/Hero_story.tsx": $stories_Hero_story,
   },
   baseUrl: import.meta.url,
 } satisfies Manifest;
