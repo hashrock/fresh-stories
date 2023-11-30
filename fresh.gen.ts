@@ -2,39 +2,40 @@
 // This file SHOULD be checked into source version control.
 // This file is automatically updated during development when running `dev.ts`.
 
-import * as $0 from "./routes/_404.tsx";
-import * as $1 from "./routes/_app.tsx";
-import * as $2 from "./routes/index.tsx";
-import * as $3 from "./routes/stories.tsx";
-import * as $$0 from "./islands/ColoredButton.tsx";
-import * as $$1 from "./islands/Counter.tsx";
-import * as $$2 from "./islands/StoryFrame.tsx";
-import * as $$3 from "./islands/StoryList.tsx";
-import * as $$4 from "./islands/stories/Button.tsx";
-import * as $$5 from "./islands/stories/Counter.tsx";
-import * as $$6 from "./islands/stories/Footer.tsx";
-import * as $$7 from "./islands/stories/Header.tsx";
-import * as $$8 from "./islands/stories/Hero.tsx";
+import * as $_404 from "./routes/_404.tsx";
+import * as $_app from "./routes/_app.tsx";
+import * as $index from "./routes/index.tsx";
+import * as $stories from "./routes/stories.tsx";
+import * as $ColoredButton from "./islands/ColoredButton.tsx";
+import * as $Counter from "./islands/Counter.tsx";
+import * as $StoryFrame from "./islands/StoryFrame.tsx";
+import * as $StoryList from "./islands/StoryList.tsx";
+import * as $stories_Button from "./islands/stories/Button.tsx";
+import * as $stories_Counter from "./islands/stories/Counter.tsx";
+import * as $stories_Footer from "./islands/stories/Footer.tsx";
+import * as $stories_Header from "./islands/stories/Header.tsx";
+import * as $stories_Hero from "./islands/stories/Hero.tsx";
+import { type Manifest } from "$fresh/server.ts";
 
 const manifest = {
   routes: {
-    "./routes/_404.tsx": $0,
-    "./routes/_app.tsx": $1,
-    "./routes/index.tsx": $2,
-    "./routes/stories.tsx": $3,
+    "./routes/_404.tsx": $_404,
+    "./routes/_app.tsx": $_app,
+    "./routes/index.tsx": $index,
+    "./routes/stories.tsx": $stories,
   },
   islands: {
-    "./islands/ColoredButton.tsx": $$0,
-    "./islands/Counter.tsx": $$1,
-    "./islands/StoryFrame.tsx": $$2,
-    "./islands/StoryList.tsx": $$3,
-    "./islands/stories/Button.tsx": $$4,
-    "./islands/stories/Counter.tsx": $$5,
-    "./islands/stories/Footer.tsx": $$6,
-    "./islands/stories/Header.tsx": $$7,
-    "./islands/stories/Hero.tsx": $$8,
+    "./islands/ColoredButton.tsx": $ColoredButton,
+    "./islands/Counter.tsx": $Counter,
+    "./islands/StoryFrame.tsx": $StoryFrame,
+    "./islands/StoryList.tsx": $StoryList,
+    "./islands/stories/Button.tsx": $stories_Button,
+    "./islands/stories/Counter.tsx": $stories_Counter,
+    "./islands/stories/Footer.tsx": $stories_Footer,
+    "./islands/stories/Header.tsx": $stories_Header,
+    "./islands/stories/Hero.tsx": $stories_Hero,
   },
   baseUrl: import.meta.url,
-};
+} satisfies Manifest;
 
 export default manifest;

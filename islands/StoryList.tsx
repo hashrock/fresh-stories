@@ -1,6 +1,6 @@
 import IconSearch from "https://deno.land/x/tabler_icons_tsx@0.0.5/tsx/search.tsx";
 import { useState } from "preact/hooks";
-import { cx } from "twind/core";
+import { cl } from "https://deno.land/x/kt3klib@v0.0.3/cl.ts";
 
 export interface Story {
   path: string;
@@ -21,7 +21,7 @@ export default function Stories({ stories, path }: StoriesProps) {
           <IconSearch class="w-4 h-4" />
         </div>
         <input
-          class="border border-gray-300 rounded w-full pl-4 py-2 rounded-full text-sm"
+          class="border border-gray-300 w-full pl-4 py-2 rounded-full text-sm"
           type="text"
           placeholder="Filter"
           value={search}
@@ -37,7 +37,7 @@ export default function Stories({ stories, path }: StoriesProps) {
           return (
             <li>
               <a
-                class={cx(
+                class={cl(
                   "block",
                   "py-2 border-l pl-4 text-sm hover:border-purple-500",
                   active && "border-purple-400",

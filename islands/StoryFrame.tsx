@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "preact/hooks";
-import { cx } from "twind/core";
-
+import { cl } from "https://deno.land/x/kt3klib@v0.0.3/cl.ts";
 interface StoryFrameProps {
   path: string;
 }
@@ -12,18 +11,20 @@ export default function StoryFrame(props: StoryFrameProps) {
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const [offsetX, setOffsetX] = useState<number | null>(null);
 
+  const handleLoad = () => {
+    setHeight(iframeRef.current!.contentWindow!.document.body.scrollHeight);
+    setReady(true);
+  };
+
   useEffect(() => {
     const iframe = iframeRef.current;
-    if (iframe === null) return;
-
-    iframe.addEventListener("load", () => {
-      setHeight(iframe.contentWindow!.document.body.scrollHeight);
-      setReady(true);
-    });
-
-    return () => {
-      iframe.removeEventListener("load", () => {});
-    };
+    if (iframe === null || iframeRef.current === null) {
+      console.error("iframe is null");
+      return;
+    }
+    // Workaround for iframe fires before react attaches event listeners
+    // https://github.com/facebook/react/issues/6541#issuecomment-1174249634
+    iframeRef.current.src = props.path;
   }, []);
 
   const onPointerDown = (e: PointerEvent) => {
@@ -44,7 +45,7 @@ export default function StoryFrame(props: StoryFrameProps) {
   };
 
   return (
-    <div class={cx("flex transition-all", ready ? "opacity-100" : "opacity-0")}>
+    <div class={cl("flex transition-all", ready ? "opacity-100" : "opacity-0")}>
       <div
         class="border rounded-lg"
         style={{ width: `${width}px` }}
@@ -52,7 +53,7 @@ export default function StoryFrame(props: StoryFrameProps) {
         <iframe
           ref={iframeRef}
           class="w-full"
-          src={props.path}
+          onLoad={handleLoad}
           style={{ height: `${Math.max(height, 150)}px` }}
         />
       </div>

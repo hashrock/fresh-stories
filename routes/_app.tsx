@@ -1,5 +1,4 @@
-import { AppProps } from "$fresh/server.ts";
-
+import { type AppProps } from "$fresh/server.ts";
 export default function App({ Component }: AppProps) {
   return (
     <html>
@@ -7,6 +6,7 @@ export default function App({ Component }: AppProps) {
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Fresh stories</title>
+        <link rel="stylesheet" href="/styles.css" />
       </head>
       <body>
         <Component />
