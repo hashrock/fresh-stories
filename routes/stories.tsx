@@ -13,12 +13,12 @@ export default defineRoute(async (_req, ctx) => {
   const path = ctx.url.searchParams.get("path");
   const single = ctx.url.searchParams.get("single");
 
-  const storiesIter = await expandGlob("islands/stories/**/*.stories.tsx");
+  const storiesIter = await expandGlob("islands/stories/**/*_story.tsx");
   const stories: Story[] = [];
   for await (const story of storiesIter) {
     stories.push({
       path: toRelativePath(story.path),
-      name: story.name.replace(/\.stories\.tsx$/, ""),
+      name: story.name.replace(/_story\.tsx$/, ""),
     });
   }
 
