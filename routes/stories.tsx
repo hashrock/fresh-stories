@@ -88,20 +88,28 @@ export default defineRoute(async (_req, ctx) => {
 
             {description && (
               <div class="mt-8">
-                <PreactMarkdown
-                  className="markdown-body"
-                  rehypePlugins={[rehypeHighlight]}
-                >
-                  {description}
-                </PreactMarkdown>
+                <details open>
+                  <summary class="text-gray-500 text-sm uppercase">
+                    Usage
+                  </summary>
+
+                  <PreactMarkdown
+                    className="markdown-body"
+                    rehypePlugins={[rehypeHighlight]}
+                  >
+                    {description}
+                  </PreactMarkdown>
+                </details>
               </div>
             )}
 
             {code && (
               <div class="mt-8">
                 <details>
-                  <summary class="text-gray-600 text-sm">Code</summary>
-                  <pre class="mt-2 text-gray-600 text-sm">
+                  <summary class="text-gray-500 text-sm uppercase">
+                    Code
+                  </summary>
+                  <pre class="mt-2 text-gray-600 text-sm p-4 border rounded-xl">
                     <code>{code}</code>
                   </pre>
                 </details>
