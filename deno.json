@@ -13,6 +13,7 @@
     "$fresh/": "https://deno.land/x/fresh@1.6.0/",
     "preact": "https://esm.sh/preact@10.19.2",
     "preact/": "https://esm.sh/preact@10.19.2/",
+    "preact/compat": "https://esm.sh/preact@10.19.2/compat",
     "@preact/signals": "https://esm.sh/*@preact/signals@1.2.1",
     "@preact/signals-core": "https://esm.sh/*@preact/signals-core@1.5.0",
     "tailwindcss": "npm:tailwindcss@3.3.5",
