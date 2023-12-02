@@ -1,4 +1,4 @@
-import { defineRoute } from "$fresh/server.ts";
+import { defineRoute, Handlers } from "$fresh/server.ts";
 import StoryFrame from "../islands/StoryFrame.tsx";
 import { expandGlob } from "https://deno.land/std@0.208.0/fs/expand_glob.ts";
 import IconComponents from "https://deno.land/x/tabler_icons_tsx@0.0.5/tsx/components.tsx";
