@@ -19,17 +19,23 @@ export const handler: Handlers = {
   async GET(_req, ctx) {
     const path = ctx.url.searchParams.get("path");
     const single = ctx.url.searchParams.get("single");
-    if (path === null) {
-      return new Response("Not found", { status: 404 });
-    }
-
-    const storiesIter = await expandGlob("islands/**/*.story.tsx");
     const stories: Story[] = [];
+    const storiesIter = await expandGlob("islands/**/*.story.tsx");
     for await (const story of storiesIter) {
       stories.push({
         path: toRelativePath(story.path),
         name: story.name.replace(/\.story\.tsx$/, ""),
       });
+    }
+
+    if (path === null && stories.length > 0) {
+      return new Response(`Redirecting to ${path}`, {
+        headers: { "Location": "?path=" + stories[0].path },
+        status: 307,
+      });
+    }
+    if (path === null) {
+      return new Response("Not found", { status: 404 });
     }
 
     let description: string | null = null;
