@@ -12,30 +12,22 @@ import PreactMarkdown from "https://esm.sh/react-markdown@7.1.2?alias=react:prea
 import rehypeHighlight from "https://esm.sh/rehype-highlight@5.0.2";
 import { JSX } from "preact";
 import { ReactNode } from "preact/compat";
-import { join } from "https://deno.land/std@0.208.0/path/mod.ts";
 
 function toRelativePath(path: string) {
   return path.replace(Deno.cwd(), "").replace(/^\//, "");
 }
 
-export function handler(url: string) {
-  const _handler: Handlers = {
-    async GET(_req, ctx) {
-      const path = ctx.url.searchParams.get("path");
-      const story = await import(
-        join(
-          url,
-          `../${path}`,
-        )
-      );
-      const { default: Story } = story;
-      ctx.state.story = Story;
-      return await ctx.render();
-    },
-  };
-
-  return _handler;
-}
+export const handler: Handlers = {
+  async GET(_req, ctx) {
+    const path = ctx.url.searchParams.get("path");
+    const story = await import(
+      `../${path}`
+    );
+    const { default: Story } = story;
+    ctx.state.story = Story;
+    return await ctx.render();
+  },
+};
 
 export default function StoriesNoAsync(props: PageProps) {
   const Story = props.state.story as ReactNode;
