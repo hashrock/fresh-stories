@@ -19,6 +19,11 @@ export default function storiesPlugin(): Plugin {
         handler: noasync.handler,
         component: noasync.default,
       },
+      {
+        path: "/stories-single",
+        handler: noasync.handler,
+        component: noasync.default,
+      },
     ],
   };
 }
