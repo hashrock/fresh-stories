@@ -1,6 +1,6 @@
 import { Plugin } from "$fresh/server.ts";
-import Stories from "./routes/stories.tsx";
-import * as noasync from "./routes/stories-no-async.tsx";
+import * as stories from "./routes/stories.tsx";
+import * as storiesSingle from "./routes/stories-single.tsx";
 
 export default function storiesPlugin(): Plugin {
   return {
@@ -16,13 +16,13 @@ export default function storiesPlugin(): Plugin {
     routes: [
       {
         path: "/stories",
-        handler: noasync.handler,
-        component: noasync.default,
+        handler: stories.handler,
+        component: stories.default,
       },
       {
         path: "/stories-single",
-        handler: noasync.handler,
-        component: noasync.default,
+        handler: storiesSingle.handler,
+        component: storiesSingle.default,
       },
     ],
   };

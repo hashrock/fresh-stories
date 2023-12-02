@@ -5,8 +5,9 @@
 import * as $_404 from "./routes/_404.tsx";
 import * as $_app from "./routes/_app.tsx";
 import * as $index from "./routes/index.tsx";
-import * as $stories_no_async from "./routes/stories-no-async.tsx";
+import * as $stories_single from "./routes/stories-single.tsx";
 import * as $stories from "./routes/stories.tsx";
+import * as $stories_old from "./routes/stories_old.tsx";
 import * as $ColoredButton from "./islands/ColoredButton.tsx";
 import * as $Counter from "./islands/Counter.tsx";
 import * as $StoryFrame from "./islands/StoryFrame.tsx";
@@ -23,8 +24,9 @@ const manifest = {
     "./routes/_404.tsx": $_404,
     "./routes/_app.tsx": $_app,
     "./routes/index.tsx": $index,
-    "./routes/stories-no-async.tsx": $stories_no_async,
+    "./routes/stories-single.tsx": $stories_single,
     "./routes/stories.tsx": $stories,
+    "./routes/stories_old.tsx": $stories_old,
   },
   islands: {
     "./islands/ColoredButton.tsx": $ColoredButton,

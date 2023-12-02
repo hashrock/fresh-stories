@@ -34,7 +34,7 @@ export const handler: Handlers = {
   },
 };
 
-export default function StoriesNoAsync(props: PageProps) {
+export default function StoriesSingle(props: PageProps) {
   const Story = props.state.story as ReactNode;
   return (
     <main>

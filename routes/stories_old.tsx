@@ -1,8 +1,4 @@
-// Document https://fresh.deno.dev/docs/getting-started/create-a-route
-
-import { Handlers, PageProps } from "$fresh/server.ts";
-import Counter from "../islands/Counter.tsx";
-import { useSignal } from "@preact/signals";
+import { defineRoute } from "$fresh/server.ts";
 import StoryFrame from "../islands/StoryFrame.tsx";
 import { expandGlob } from "https://deno.land/std@0.208.0/fs/expand_glob.ts";
 import IconComponents from "https://deno.land/x/tabler_icons_tsx@0.0.5/tsx/components.tsx";
@@ -10,54 +6,56 @@ import IconChevronLeft from "https://deno.land/x/tabler_icons_tsx@0.0.5/tsx/chev
 import StoryList, { Story } from "../islands/StoryList.tsx";
 import PreactMarkdown from "https://esm.sh/react-markdown@7.1.2?alias=react:preact/compat,@types/react:preact/compat";
 import rehypeHighlight from "https://esm.sh/rehype-highlight@5.0.2";
-import { JSX } from "preact";
-import { ReactNode } from "preact/compat";
-import { join } from "https://deno.land/std@0.203.0/path/mod.ts";
 
 function toRelativePath(path: string) {
   return path.replace(Deno.cwd(), "").replace(/^\//, "");
 }
 
-export const handler: Handlers = {
-  async GET(_req, ctx) {
-    const path = ctx.url.searchParams.get("path");
-    const single = ctx.url.searchParams.get("single");
-    if (path === null) {
+export default defineRoute(async (_req, ctx) => {
+  const path = ctx.url.searchParams.get("path");
+  const single = ctx.url.searchParams.get("single");
+
+  const storiesIter = await expandGlob("islands/**/*.story.tsx");
+  const stories: Story[] = [];
+  for await (const story of storiesIter) {
+    stories.push({
+      path: toRelativePath(story.path),
+      name: story.name.replace(/\.story\.tsx$/, ""),
+    });
+  }
+
+  let description: string | null = null;
+  let code: string | null = null;
+
+  if (path !== null) {
+    // secure the path
+    const matchedStory = stories.find((story) => story.path === path);
+    if (matchedStory === undefined) {
       return new Response("Not found", { status: 404 });
     }
 
-    const storiesIter = await expandGlob("islands/**/*.story.tsx");
-    const stories: Story[] = [];
-    for await (const story of storiesIter) {
-      stories.push({
-        path: toRelativePath(story.path),
-        name: story.name.replace(/\.story\.tsx$/, ""),
-      });
-    }
-
-    let description: string | null = null;
-    let code: string | null = null;
-
     code = await Deno.readTextFile(path);
     const story = await import(
-      join(Deno.cwd(), path)
+      `../${path}`
     );
     const { default: Story, description: importedDescription } = story;
+    if (single !== null) {
+      return (
+        <div class="p-8 flex justify-center items-center">
+          <Story />
+        </div>
+      );
+    } else {
+      description = importedDescription;
+    }
+  }
 
-    ctx.state.story = Story;
-    ctx.state.description = importedDescription;
-    ctx.state.stories = stories;
-    return await ctx.render();
-  },
-};
-
-export default function StoriesNoAsync(props: PageProps) {
-  const Story = props.state.story as ReactNode;
-  const stories = props.state.stories as Story[];
-  const path = props.url.searchParams.get("path");
-  const single = props.url.searchParams.get("single");
-  const description = props.state.description as string;
-  const code = props.state.code as string;
+  if (path === null && stories.length > 0) {
+    return new Response(`Redirecting to ${path}`, {
+      headers: { "Location": "?path=" + stories[0].path },
+      status: 307,
+    });
+  }
 
   return (
     <main>
@@ -86,7 +84,7 @@ export default function StoriesNoAsync(props: PageProps) {
               rel="stylesheet"
               href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github.min.css"
             />
-            <StoryFrame path={`stories-single?single&path=${path}`} />
+            <StoryFrame path={`?single&path=${path}`} />
 
             {description && (
               <div class="mt-8">
@@ -122,4 +120,4 @@ export default function StoriesNoAsync(props: PageProps) {
       </div>
     </main>
   );
-}
+});
