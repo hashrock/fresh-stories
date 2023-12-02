@@ -2,7 +2,7 @@ import { Plugin } from "$fresh/server.ts";
 import Stories from "./routes/stories.tsx";
 import * as noasync from "./routes/stories-no-async.tsx";
 
-export default function storiesPlugin(): Plugin {
+export default function storiesPlugin(url: string): Plugin {
   return {
     name: "stories",
     islands: {
@@ -16,7 +16,7 @@ export default function storiesPlugin(): Plugin {
     routes: [
       {
         path: "/stories",
-        handler: noasync.handler,
+        handler: noasync.handler(url),
         component: noasync.default,
       },
     ],

@@ -3,5 +3,5 @@ import tailwind from "$fresh/plugins/tailwind.ts";
 import storiesPlugin from "../stories-plugin.tsx";
 
 export default defineConfig({
-  plugins: [tailwind(), storiesPlugin()],
+  plugins: [tailwind(), storiesPlugin(import.meta.url)],
 });
