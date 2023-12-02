@@ -10,7 +10,6 @@ export default function storiesPlugin(): Plugin {
       paths: [
         "./islands/StoryFrame.tsx",
         "./islands/StoryList.tsx",
-        "./islands/Counter.tsx",
       ],
     },
     routes: [
