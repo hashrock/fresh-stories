@@ -61,6 +61,7 @@ export default function StoriesNoAsync(props: PageProps) {
 
   return (
     <main>
+      <link rel="stylesheet" href="/styles_build.css" />
       <div class="flex">
         <div class="w-[20rem] py-4 px-8 bg-gray-50 h-screen">
           <div>
