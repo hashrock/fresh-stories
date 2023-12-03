@@ -37,6 +37,11 @@ export const handler: Handlers = {
     if (path === null) {
       return new Response("Not found", { status: 404 });
     }
+    // secure the path
+    const matchedStory = stories.find((story) => story.path === path);
+    if (matchedStory === undefined) {
+      return new Response("Not found", { status: 404 });
+    }
 
     let code: string | null = null;
 
