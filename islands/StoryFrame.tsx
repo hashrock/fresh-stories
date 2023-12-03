@@ -44,6 +44,10 @@ export default function StoryFrame(props: StoryFrameProps) {
     }
   };
 
+  const onTouchMove = (e: TouchEvent) => {
+    e.preventDefault();
+  };
+
   return (
     <div class={cl("flex transition-all", ready ? "opacity-100" : "opacity-0")}>
       <div
@@ -62,6 +66,7 @@ export default function StoryFrame(props: StoryFrameProps) {
         onPointerDown={onPointerDown}
         onPointerUp={onPointerUp}
         onPointerMove={onPointerMove}
+        onTouchMove={onTouchMove}
       >
         <div class="bg-gray-300 transition-colors group-hover:bg-gray-500 h-12 w-2 rounded">
         </div>
