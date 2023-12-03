@@ -39,6 +39,13 @@ export default function Stories() {
 
 3. Open http://localhost:8000/stories
 
+# Story files
+
+The Story file is a simple tsx file summarizing the usage of components.
+
+-  Story files need to be created with the name `*.story.tsx`.
+-  Story files need to be placed inside the islands folder.
+
 # Example
 
 https://github.com/hashrock/fresh-stories-example
