@@ -5,16 +5,11 @@
 import * as $_404 from "./routes/_404.tsx";
 import * as $_app from "./routes/_app.tsx";
 import * as $index from "./routes/index.tsx";
+import * as $stories_single from "./routes/stories-single.tsx";
 import * as $stories from "./routes/stories.tsx";
-import * as $ColoredButton from "./islands/ColoredButton.tsx";
-import * as $Counter from "./islands/Counter.tsx";
+import * as $stories_old from "./routes/stories_old.tsx";
 import * as $StoryFrame from "./islands/StoryFrame.tsx";
 import * as $StoryList from "./islands/StoryList.tsx";
-import * as $stories_Button_story from "./islands/stories/Button.story.tsx";
-import * as $stories_Counter_story from "./islands/stories/Counter.story.tsx";
-import * as $stories_Footer_story from "./islands/stories/Footer.story.tsx";
-import * as $stories_Header_story from "./islands/stories/Header.story.tsx";
-import * as $stories_Hero_story from "./islands/stories/Hero.story.tsx";
 import { type Manifest } from "$fresh/server.ts";
 
 const manifest = {
@@ -22,18 +17,13 @@ const manifest = {
     "./routes/_404.tsx": $_404,
     "./routes/_app.tsx": $_app,
     "./routes/index.tsx": $index,
+    "./routes/stories-single.tsx": $stories_single,
     "./routes/stories.tsx": $stories,
+    "./routes/stories_old.tsx": $stories_old,
   },
   islands: {
-    "./islands/ColoredButton.tsx": $ColoredButton,
-    "./islands/Counter.tsx": $Counter,
     "./islands/StoryFrame.tsx": $StoryFrame,
     "./islands/StoryList.tsx": $StoryList,
-    "./islands/stories/Button.story.tsx": $stories_Button_story,
-    "./islands/stories/Counter.story.tsx": $stories_Counter_story,
-    "./islands/stories/Footer.story.tsx": $stories_Footer_story,
-    "./islands/stories/Header.story.tsx": $stories_Header_story,
-    "./islands/stories/Hero.story.tsx": $stories_Hero_story,
   },
   baseUrl: import.meta.url,
 } satisfies Manifest;

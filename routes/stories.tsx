@@ -1,4 +1,4 @@
-import { defineRoute } from "$fresh/server.ts";
+import { Handlers, PageProps } from "$fresh/server.ts";
 import StoryFrame from "../islands/StoryFrame.tsx";
 import { expandGlob } from "https://deno.land/std@0.208.0/fs/expand_glob.ts";
 import IconComponents from "https://deno.land/x/tabler_icons_tsx@0.0.5/tsx/components.tsx";
@@ -6,59 +6,64 @@ import IconChevronLeft from "https://deno.land/x/tabler_icons_tsx@0.0.5/tsx/chev
 import StoryList, { Story } from "../islands/StoryList.tsx";
 import PreactMarkdown from "https://esm.sh/react-markdown@7.1.2?alias=react:preact/compat,@types/react:preact/compat";
 import rehypeHighlight from "https://esm.sh/rehype-highlight@5.0.2";
+import { join } from "https://deno.land/std@0.203.0/path/mod.ts";
 
 function toRelativePath(path: string) {
   return path.replace(Deno.cwd(), "").replace(/^\//, "");
 }
 
-export default defineRoute(async (_req, ctx) => {
-  const path = ctx.url.searchParams.get("path");
-  const single = ctx.url.searchParams.get("single");
+export const handler: Handlers = {
+  async GET(_req, ctx) {
+    const path = ctx.url.searchParams.get("path");
+    const stories: Story[] = [];
+    const storiesIter = await expandGlob("islands/**/*.story.tsx");
+    for await (const story of storiesIter) {
+      stories.push({
+        path: toRelativePath(story.path),
+        name: story.name.replace(/\.story\.tsx$/, ""),
+      });
+    }
 
-  const storiesIter = await expandGlob("islands/**/*.story.tsx");
-  const stories: Story[] = [];
-  for await (const story of storiesIter) {
-    stories.push({
-      path: toRelativePath(story.path),
-      name: story.name.replace(/\.story\.tsx$/, ""),
-    });
-  }
-
-  let description: string | null = null;
-  let code: string | null = null;
-
-  if (path !== null) {
+    // redirect to the first story
+    if (path === null && stories.length > 0) {
+      return new Response(`Redirecting to ${path}`, {
+        headers: { "Location": "?path=" + stories[0].path },
+        status: 307,
+      });
+    }
+    if (path === null) {
+      return new Response("Not found", { status: 404 });
+    }
     // secure the path
     const matchedStory = stories.find((story) => story.path === path);
     if (matchedStory === undefined) {
       return new Response("Not found", { status: 404 });
     }
 
+    let code: string | null = null;
+
     code = await Deno.readTextFile(path);
     const story = await import(
-      `../${path}`
+      join(Deno.cwd(), path)
     );
-    const { default: Story, description: importedDescription } = story;
-    if (single !== null) {
-      return (
-        <div class="p-8 flex justify-center items-center">
-          <Story />
-        </div>
-      );
-    } else {
-      description = importedDescription;
-    }
-  }
+    const { description: importedDescription } = story;
 
-  if (path === null && stories.length > 0) {
-    return new Response(`Redirecting to ${path}`, {
-      headers: { "Location": "?path=" + stories[0].path },
-      status: 307,
-    });
-  }
+    ctx.state.description = importedDescription;
+    ctx.state.stories = stories;
+    ctx.state.code = code;
+    return await ctx.render();
+  },
+};
+
+export default function StoriesNoAsync(props: PageProps) {
+  const stories = props.state.stories as Story[];
+  const path = props.url.searchParams.get("path");
+  const description = props.state.description as string;
+  const code = props.state.code as string;
 
   return (
     <main>
+      <link rel="stylesheet" href="/styles_build.css" />
       <div class="flex">
         <div class="w-[20rem] py-4 px-8 bg-gray-50 h-screen">
           <div>
@@ -84,7 +89,7 @@ export default defineRoute(async (_req, ctx) => {
               rel="stylesheet"
               href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github.min.css"
             />
-            <StoryFrame path={`?single&path=${path}`} />
+            <StoryFrame path={`stories-single?single&path=${path}`} />
 
             {description && (
               <div class="mt-8">
@@ -120,4 +125,4 @@ export default defineRoute(async (_req, ctx) => {
       </div>
     </main>
   );
-});
+}

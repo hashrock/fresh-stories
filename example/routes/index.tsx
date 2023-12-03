@@ -1,7 +1,7 @@
 export default function Home() {
   return (
     <div>
-      TODO
+      <a href="/stories">Stories</a>
     </div>
   );
 }
