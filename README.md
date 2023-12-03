@@ -22,7 +22,7 @@ export default defineConfig({
 2. Create story file
 
 ```tsx
-// Button.story.tsx
+// islands/stories/Button.story.tsx
 
 import { Button } from "../../components/Button.tsx";
 
