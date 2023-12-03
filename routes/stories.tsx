@@ -7,6 +7,7 @@ import StoryList, { Story } from "../islands/StoryList.tsx";
 import PreactMarkdown from "https://esm.sh/react-markdown@7.1.2?alias=react:preact/compat,@types/react:preact/compat";
 import rehypeHighlight from "https://esm.sh/rehype-highlight@5.0.2";
 import { join } from "https://deno.land/std@0.203.0/path/mod.ts";
+import { style } from "../utils/style.ts";
 
 function toRelativePath(path: string) {
   return path.replace(Deno.cwd(), "").replace(/^\//, "");
@@ -65,7 +66,9 @@ export default function StoriesNoAsync(props: PageProps) {
 
   return (
     <main>
-      <link rel="stylesheet" href="https://deno.land/x/fresh_stories@0.0.1/static/styles_build.css" />
+      <style type="text/css">
+        {style}
+      </style>
       <div class="flex">
         <div class="w-[20rem] py-4 px-8 bg-gray-50 h-screen">
           <div>
