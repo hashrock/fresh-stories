@@ -18,7 +18,6 @@ function toRelativePath(path: string) {
 export const handler: Handlers = {
   async GET(_req, ctx) {
     const path = ctx.url.searchParams.get("path");
-    const single = ctx.url.searchParams.get("single");
     const stories: Story[] = [];
     const storiesIter = await expandGlob("islands/**/*.story.tsx");
     for await (const story of storiesIter) {
@@ -28,6 +27,7 @@ export const handler: Handlers = {
       });
     }
 
+    // redirect to the first story
     if (path === null && stories.length > 0) {
       return new Response(`Redirecting to ${path}`, {
         headers: { "Location": "?path=" + stories[0].path },
@@ -38,7 +38,6 @@ export const handler: Handlers = {
       return new Response("Not found", { status: 404 });
     }
 
-    let description: string | null = null;
     let code: string | null = null;
 
     code = await Deno.readTextFile(path);
@@ -50,15 +49,14 @@ export const handler: Handlers = {
     ctx.state.story = Story;
     ctx.state.description = importedDescription;
     ctx.state.stories = stories;
+    ctx.state.code = code;
     return await ctx.render();
   },
 };
 
 export default function StoriesNoAsync(props: PageProps) {
-  const Story = props.state.story as ReactNode;
   const stories = props.state.stories as Story[];
   const path = props.url.searchParams.get("path");
-  const single = props.url.searchParams.get("single");
   const description = props.state.description as string;
   const code = props.state.code as string;
 
