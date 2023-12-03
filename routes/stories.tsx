@@ -43,9 +43,11 @@ export const handler: Handlers = {
     let code: string | null = null;
 
     code = await Deno.readTextFile(path);
+    const storyPath = "file://" + join(Deno.cwd(), path);
     const story = await import(
-      join(Deno.cwd(), path)
+      storyPath
     );
+
     const { description: importedDescription } = story;
 
     ctx.state.description = importedDescription;
@@ -63,7 +65,7 @@ export default function StoriesNoAsync(props: PageProps) {
 
   return (
     <main>
-      <link rel="stylesheet" href="/styles_build.css" />
+      <link rel="stylesheet" href="https://deno.land/x/fresh_stories@0.0.1/static/styles_build.css" />
       <div class="flex">
         <div class="w-[20rem] py-4 px-8 bg-gray-50 h-screen">
           <div>

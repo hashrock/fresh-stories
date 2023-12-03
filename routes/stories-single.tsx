@@ -32,9 +32,11 @@ export const handler: Handlers = {
       return new Response("Not found", { status: 404 });
     }
 
+    const storyPath = "file://" + join(Deno.cwd(), path);
     const story = await import(
-      join(Deno.cwd(), path)
+      storyPath
     );
+
     const { default: Story } = story;
     ctx.state.story = Story;
     return await ctx.render();
