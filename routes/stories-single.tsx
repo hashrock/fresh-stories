@@ -4,7 +4,7 @@ import { Handlers, PageProps } from "$fresh/server.ts";
 import { ReactNode } from "preact/compat";
 import { join } from "https://deno.land/std@0.203.0/path/mod.ts";
 import { expandGlob } from "https://deno.land/std@0.208.0/fs/expand_glob.ts";
-import StoryList, { Story } from "../islands/StoryList.tsx";
+import { Story } from "../islands/StoryList.tsx";
 
 function toRelativePath(path: string) {
   return path.replace(Deno.cwd(), "").replace(/^\//, "");
