@@ -45,7 +45,15 @@ export default function StoriesSingle(props: PageProps) {
   const Story = props.state.story as ReactNode;
   return (
     <main>
-      <div class="p-8 flex justify-center items-center">
+      <div
+        style={{
+          padding: "24px",
+          flex: "1 1 auto",
+          justifyContent: "center",
+          alignItems: "center",
+          display: "flex",
+        }}
+      >
         <Story />
       </div>
     </main>
