@@ -1,16 +1,8 @@
 import IconSearch from "https://deno.land/x/tabler_icons_tsx@0.0.5/tsx/search.tsx";
 import { useState } from "preact/hooks";
 import { cl } from "https://deno.land/x/kt3klib@v0.0.3/cl.ts";
+import { StoriesProps } from "../utils/stories_utils.ts";
 
-export interface Story {
-  path: string;
-  name: string;
-}
-
-interface StoriesProps {
-  stories: Story[];
-  path: string | null;
-}
 export default function Stories({ stories, path }: StoriesProps) {
   const [search, setSearch] = useState("");
 

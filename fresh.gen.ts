@@ -7,7 +7,6 @@ import * as $_app from "./routes/_app.tsx";
 import * as $index from "./routes/index.tsx";
 import * as $stories_single from "./routes/stories-single.tsx";
 import * as $stories from "./routes/stories.tsx";
-import * as $stories_old from "./routes/stories_old.tsx";
 import * as $StoryFrame from "./islands/StoryFrame.tsx";
 import * as $StoryList from "./islands/StoryList.tsx";
 import { type Manifest } from "$fresh/server.ts";
@@ -19,7 +18,6 @@ const manifest = {
     "./routes/index.tsx": $index,
     "./routes/stories-single.tsx": $stories_single,
     "./routes/stories.tsx": $stories,
-    "./routes/stories_old.tsx": $stories_old,
   },
   islands: {
     "./islands/StoryFrame.tsx": $StoryFrame,
