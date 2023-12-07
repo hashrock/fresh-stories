@@ -2,7 +2,13 @@ import { Plugin } from "$fresh/server.ts";
 import * as stories from "./routes/stories.tsx";
 import * as storiesSingle from "./routes/stories-single.tsx";
 
-export default function storiesPlugin(): Plugin {
+export interface StoriesPluginOptions {
+  baseLocation?: string;
+}
+
+export default function storiesPlugin(
+  options?: StoriesPluginOptions,
+): Plugin {
   return {
     name: "stories",
     islands: {
@@ -15,12 +21,12 @@ export default function storiesPlugin(): Plugin {
     routes: [
       {
         path: "/stories",
-        handler: stories.handler,
+        handler: stories.getHandler(options),
         component: stories.default,
       },
       {
         path: "/stories-single",
-        handler: storiesSingle.handler,
+        handler: storiesSingle.getHandler(options),
         component: storiesSingle.default,
       },
     ],
