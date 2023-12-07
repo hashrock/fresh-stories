@@ -25,12 +25,10 @@ export async function listStories(basePath: URL) {
   const islandsPath = new URL("islands", basePath);
   const glob = new URL("**/*.story.tsx", islandsPath);
 
-  console.log("glob", glob);
   const stories: Story[] = [];
 
   const storiesIter = await expandGlob(glob);
   for await (const story of storiesIter) {
-    console.log(story.path);
     stories.push({
       path: toRelativePath(story.path, basePath.pathname),
       name: story.name.replace(/\.story\.tsx$/, ""),
