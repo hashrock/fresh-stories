@@ -12,7 +12,7 @@ export default function storiesPlugin(
   return {
     name: "stories",
     islands: {
-      baseLocation: options?.baseLocation ?? import.meta.url,
+      baseLocation: import.meta.url,
       paths: [
         "./islands/StoryFrame.tsx",
         "./islands/StoryList.tsx",
