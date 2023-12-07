@@ -34,8 +34,8 @@ export function getHandler(options?: StoriesPluginOptions) {
       }
 
       let code: string | null = null;
-      code = await Deno.readTextFile(path);
       const importFilePath = new URL(path, projectBasePath);
+      code = await Deno.readTextFile(importFilePath);
       const story = await import(
         importFilePath.pathname
       );
