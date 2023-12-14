@@ -51,6 +51,31 @@ export function getHandler(options?: StoriesPluginOptions) {
   return handler;
 }
 
+function Description({ description }: { description: string }) {
+  const body = (typeof description === "string")
+    ? (
+      <PreactMarkdown
+        className="markdown-body"
+        rehypePlugins={[rehypeHighlight]}
+      >
+        {description}
+      </PreactMarkdown>
+    )
+    : description;
+
+  return (
+    <details open>
+      <summary class="text-gray-500 text-sm uppercase">
+        Usage
+      </summary>
+
+      <div class="mt-2">
+        {body}
+      </div>
+    </details>
+  );
+}
+
 export default function StoriesNoAsync(props: PageProps) {
   const stories = props.state.stories as Story[];
   const path = props.url.searchParams.get("path");
@@ -91,18 +116,7 @@ export default function StoriesNoAsync(props: PageProps) {
 
             {description && (
               <div class="mt-8">
-                <details open>
-                  <summary class="text-gray-500 text-sm uppercase">
-                    Usage
-                  </summary>
-
-                  <PreactMarkdown
-                    className="markdown-body"
-                    rehypePlugins={[rehypeHighlight]}
-                  >
-                    {description}
-                  </PreactMarkdown>
-                </details>
+                <Description description={description} />
               </div>
             )}
 

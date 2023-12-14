@@ -43,8 +43,8 @@ export default function Stories() {
 
 The Story file is a simple tsx file summarizing the usage of components.
 
--  Story files need to be created with the name `*.story.tsx`.
--  Story files need to be placed inside the islands folder.
+- Story files need to be created with the name `*.story.tsx`.
+- Story files need to be placed inside the islands folder.
 
 # Example
 
