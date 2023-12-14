@@ -35,14 +35,15 @@ export function getHandler(options?: StoriesPluginOptions) {
 
       let code: string | null = null;
       const importFilePath = new URL(path, projectBasePath);
-      code = await Deno.readTextFile(importFilePath);
       const story = await import(
-        importFilePath.pathname
+        importFilePath.href
       );
       const { description: importedDescription } = story;
 
       ctx.state.description = importedDescription;
       ctx.state.stories = stories;
+
+      code = await Deno.readTextFile(importFilePath);
       ctx.state.code = code;
       return await ctx.render();
     },
